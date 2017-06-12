@@ -26,7 +26,6 @@ class GoogleMapStore extends EventEmitter {
     handleAction(action) {
         switch (action.type) {
             case 'GET_CURRENT_LOCATION':
-                console.log('hi');
                 this.currentState.currentLocation = action.pos;
                 this.emitChange();
                 break;

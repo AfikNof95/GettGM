@@ -9,6 +9,7 @@ import GMStore from '../stores/GoogleMap.store';
 import GoogleMapActions from '../actions/GoogleMap.actions.js';
 import NearbyPlacesList from './nearby_places_list';
 import LocationData from './location_data';
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -45,7 +46,6 @@ class App extends Component {
     }
 
     onChange() {
-        console.log('change');
         this.setState(GMStore.getState());
     }
 }

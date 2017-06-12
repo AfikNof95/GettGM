@@ -5,10 +5,11 @@
 import GoogleMapDispatcher from '../dispatchers/GoogleMap.dispatcher';
 import GoogleMapApiUtil from '../utils/GoogleMap.api.util';
 
+//getCurrentLocation can include getAddress inside and save one state change.
+
 let GoogleMapActions = {
     getCurrentLocation: function () {
         navigator.geolocation.getCurrentPosition(function (pos) {
-            console.log('action', pos);
             this.getAddress(pos);
             this.getNearbyPlaces(pos);
             GoogleMapDispatcher.dispatch({

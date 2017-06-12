@@ -20,7 +20,6 @@ class GoogleMap extends Component {
 
 
     componentDidUpdate() {
-        console.log('Updated', this.props);
         if (this.props.address)
             if (!this.props.location)
                 this.generateGoogleMap(DEFAULT_LOCATION);

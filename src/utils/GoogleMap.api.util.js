@@ -18,10 +18,8 @@ const GoogleMapApiUtil = {
     getAddress: function (coords) {
         const latlng = `${coords.latitude},${coords.longitude}`;
         return axios.get(`${API_REVERSEGEO}${latlng}`);
-        // return axios.get(`${ROOT_URL_REVERSEGEO}&latlng=${latlng}`);
     },
     getNearbyPlaces: function (coords) {
-        console.log('nearby', coords);
         const latlng = `${coords.latitude},${coords.longitude}`;
         return axios.get(`${API_PLACES}${latlng}`);
     }
