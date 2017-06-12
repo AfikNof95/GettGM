@@ -8,8 +8,9 @@ import GoogleMapApiUtil from '../utils/GoogleMap.api.util';
 let GoogleMapActions = {
     getCurrentLocation: function () {
         navigator.geolocation.getCurrentPosition(function (pos) {
-            console.log('action');
+            console.log('action',pos);
             this.getAddress(pos);
+            this.getNearbyPlaces(pos);
             GoogleMapDispatcher.dispatch({
                 type: 'GET_CURRENT_LOCATION',
                 pos
@@ -19,14 +20,22 @@ let GoogleMapActions = {
     },
     getAddress(position){
         GoogleMapApiUtil.getAddress(position.coords).then(function (response) {
-            console.log(response);
-            let formattedAddress=response.data.results[0].formatted_address;
+            let formattedAddress = response.data.results[0].formatted_address;
             GoogleMapDispatcher.dispatch({
                 type: 'GET_ADDRESS',
-                address:formattedAddress
+                address: formattedAddress
             })
         });
 
+    },
+    getNearbyPlaces(position){
+        GoogleMapApiUtil.getNearbyPlaces(position.coords).then(function (response) {
+            GoogleMapDispatcher.dispatch({
+                type: 'GET_NEARBY_PLACES',
+                response
+            })
+        })
     }
+
 };
 export default GoogleMapActions;

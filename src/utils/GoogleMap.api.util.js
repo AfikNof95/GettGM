@@ -3,8 +3,10 @@
  */
 
 const DEFAULT_LOCATION = {coords: {latitude: 4, loongitude: 4}};
-const API_KEY = 'AIzaSyD9F3-xzEKrc10lhn0tOQS3ocmhy8UkfxQ';
-const ROOT_URL = `https://maps.googleapis.com/maps/api/geocode/json?key=${API_KEY}`;
+const API_KEY_REVERSEGEO = 'AIzaSyD9F3-xzEKrc10lhn0tOQS3ocmhy8UkfxQ';
+const API_KEY_PLACES = 'AIzaSyDhPgHTHDBL5Y40wyTQEVrVMwKvV37GHB4';
+const ROOT_URL_REVERSEGEO = `https://maps.googleapis.com/maps/api/geocode/json?key=${API_KEY_REVERSEGEO}`;
+const ROOT_URL_PLACES = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=500&key=${API_KEY_PLACES}`;
 import axios from 'axios';
 
 const GoogleMapApiUtil = {
@@ -13,7 +15,12 @@ const GoogleMapApiUtil = {
     },
     getAddress: function (coords) {
         const latlng = `${coords.latitude},${coords.longitude}`;
-        return axios.get(`${ROOT_URL}&latlng=${latlng}`);
+        return axios.get(`${ROOT_URL_REVERSEGEO}&latlng=${latlng}`);
+    },
+    getNearbyPlaces: function (coords) {
+        console.log('nearby',coords);
+        const latlng = `${coords.latitude},${coords.longitude}`;
+        return axios.get(`${ROOT_URL_PLACES}&latlng=${latlng}`);
     }
 };
 module.exports = GoogleMapApiUtil;

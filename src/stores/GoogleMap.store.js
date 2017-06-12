@@ -33,6 +33,9 @@ class GoogleMapStore extends EventEmitter {
             case 'GET_ADDRESS':
                 this.currentState.address = action.address;
                 this.emitChange();
+                break;
+            case 'GET_NEARBY_PLACES':
+                this.currentState.nearbyPlaces = action.response;
         }
     }
 
