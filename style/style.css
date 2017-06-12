@@ -1,4 +1,38 @@
 .google-map {
-    height: 500px;
-    width: 500px;
+    min-width: 500px;
+    min-height: 500px;
+    flex-basis: 70%;
+}
+
+.nearby-places {
+    overflow: auto;
+    direction: rtl;
+}
+
+.map-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap row;
+    justify-content: space-between;
+}
+
+.nearby-places-item {
+    font-size: 14px;
+    margin: 5px;
+}
+
+.nearby-places li {
+    display: block;
+    border: 1px solid lightgray;
+}
+
+.nearby-places-container {
+    flex-basis: 25%;
+}
+
+.nearby-places-container h4 {
+    text-align: center;
+}
+.location-data{
+    flex-basis: 100%;
 }

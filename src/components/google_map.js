@@ -11,6 +11,8 @@ class GoogleMap extends Component {
     }
 
     render() {
+        if (!this.props.address)
+            return <div>Loading!!!</div>
         return (
             <div ref="map" className="google-map"></div>
         )
@@ -19,11 +21,12 @@ class GoogleMap extends Component {
 
     componentDidUpdate() {
         console.log('Updated', this.props);
-        if (!this.props.location)
-            this.generateGoogleMap(DEFAULT_LOCATION);
-        else {
-            this.generateGoogleMap(this.props.location,true);
-        }
+        if (this.props.address)
+            if (!this.props.location)
+                this.generateGoogleMap(DEFAULT_LOCATION);
+            else {
+                this.generateGoogleMap(this.props.location, true);
+            }
     }
 
 
@@ -36,11 +39,20 @@ class GoogleMap extends Component {
             }
         });
         if (geolocationActivated) {
-            var message=this.props.address;
+            var message = this.props.address;
             const infoWindow = new google.maps.InfoWindow({map: map});
             infoWindow.setPosition(map.center);
-            infoWindow.setContent(message||'You are here!');
+            infoWindow.setContent(message || 'You are here!');
             map.setCenter(map.center);
+        }
+        if (this.props.nearbyPlaces) {
+            this.props.nearbyPlaces.forEach(function (currentValue,index,arr) {
+                new google.maps.Marker({
+                    position: currentValue.geometry.location,
+                    map: map,
+                    title: currentValue.name
+                });
+            });
         }
     }
 

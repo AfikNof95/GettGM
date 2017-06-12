@@ -8,7 +8,7 @@ import GoogleMapApiUtil from '../utils/GoogleMap.api.util';
 let GoogleMapActions = {
     getCurrentLocation: function () {
         navigator.geolocation.getCurrentPosition(function (pos) {
-            console.log('action',pos);
+            console.log('action', pos);
             this.getAddress(pos);
             this.getNearbyPlaces(pos);
             GoogleMapDispatcher.dispatch({
@@ -30,9 +30,11 @@ let GoogleMapActions = {
     },
     getNearbyPlaces(position){
         GoogleMapApiUtil.getNearbyPlaces(position.coords).then(function (response) {
+            const nearByPlaces = response.data.results;
+            
             GoogleMapDispatcher.dispatch({
                 type: 'GET_NEARBY_PLACES',
-                response
+                nearByPlaces
             })
         })
     }

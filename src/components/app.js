@@ -4,14 +4,11 @@
 
 import React, {Component} from 'react';
 import GoogleMap from './google_map';
-import SearchBar from './search_bar';
-const API_KEY = 'AIzaSyD9F3-xzEKrc10lhn0tOQS3ocmhy8UkfxQ';
-const ROOT_URL_GOOGLEMAPS = `https://maps.googleapis.com/maps/api/geocode/json?key=${API_KEY}`;
-
 
 import GMStore from '../stores/GoogleMap.store';
 import GoogleMapActions from '../actions/GoogleMap.actions.js';
-
+import NearbyPlacesList from './nearby_places_list';
+import LocationData from './location_data';
 class App extends Component {
     constructor(props) {
         super(props);
@@ -20,11 +17,14 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <SearchBar inputValue={this.state.inputValue} onInputChange={(e)=>this.onInputChange(e)}/>
+            <div className="map-container">
+                <LocationData location={this.state.currentLocation} address={this.state.address}/>
                 <GoogleMap
                     address={this.state.address}
-                    location={this.state.currentLocation}/>
+                    location={this.state.currentLocation}
+                    nearbyPlaces={this.state.nearbyPlaces}
+                />
+                <NearbyPlacesList nearbyPlaces={this.state.nearbyPlaces}/>
             </div>
         );
     }
@@ -47,7 +47,6 @@ class App extends Component {
     onChange() {
         console.log('change');
         this.setState(GMStore.getState());
-        console.log(this.state);
     }
 }
 
